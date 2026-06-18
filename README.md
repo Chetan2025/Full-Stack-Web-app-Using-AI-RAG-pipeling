@@ -219,4 +219,4 @@ Open the frontend folder and launch `index.html` using a browser or local server
 
 **Chetan**
 
-AI Engineer | Full Stack Developer | RAG Systems Builder
+AI Engineer | Full Stack Developer | 
