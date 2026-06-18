@@ -1,0 +1,92 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+}
+
+.container{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.card{
+    width:420px;
+    background:#1e293b;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(0,0,0,.4);
+}
+
+.card h1{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.input-group{
+    margin-bottom:15px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:5px;
+}
+
+.input-group input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+}
+
+.btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    background:#3b82f6;
+    color:white;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:#2563eb;
+}
+
+.link{
+    text-align:center;
+    margin-top:15px;
+}
+
+.dashboard{
+    padding:30px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.bot-card{
+    background:#1e293b;
+    padding:20px;
+    border-radius:15px;
+    margin-top:20px;
+}
+
+.api-box{
+    margin-top:10px;
+    padding:10px;
+    background:#0f172a;
+    border-radius:10px;
+    word-break:break-all;
+}
