@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create Bot | RAG Builder</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container upload-layout">
+
+<div class="card">
+
+<div class="card-topline">
+<a href="dashboard.html">Back to dashboard</a>
+<span class="pill">Protected</span>
+</div>
+
+<h1>Create Chatbot</h1>
+
+<div id="statusMessage" class="status-message" style="display:none"></div>
+
+<p class="muted">Upload up to 3 documents. Supported flow: PDF, DOCX and TXT through the backend pipeline.</p>
+
+<input
+multiple
+type="file"
+id="files"
+accept=".pdf,.docx,.txt"
+>
+
+<br><br>
+
+<button
+class="btn"
+onclick="uploadFiles()">
+Create Bot
+</button>
+
+</div>
+
+</div>
+
+<script src="app.js"></script>
+<script src="upload.js"></script>
+
+</body>
+</html>

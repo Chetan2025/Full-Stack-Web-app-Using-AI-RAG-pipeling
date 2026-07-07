@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Register | RAG Builder</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="shell">
+<section class="hero-panel accent-two">
+<div class="hero-copy">
+<span class="eyebrow">Create account</span>
+<h1>Start building your own AI bot</h1>
+<p>Register once, then create and manage chatbot APIs from your documents.</p>
+<div class="hero-actions">
+<a class="btn secondary btn-inline" href="login.html">Back to login</a>
+</div>
+</div>
+</section>
+
+<section class="card auth-card">
+
+<h1>Register</h1>
+
+<div id="statusMessage" class="status-message" style="display:none"></div>
+
+<form id="registerForm" novalidate>
+<div class="input-group">
+<label for="username">Username</label>
+<input id="username" name="username" autocomplete="username" placeholder="Choose a username" required>
+</div>
+
+<div class="input-group">
+<label for="email">Email</label>
+<input id="email" name="email" type="email" autocomplete="email" placeholder="Enter email address" required>
+</div>
+
+<div class="input-group">
+<label for="password">Password</label>
+<input id="password" name="password" type="password" autocomplete="new-password" placeholder="Create a password" required>
+</div>
+
+<button class="btn" type="submit">Register</button>
+</form>
+
+<div class="link">
+<a href="login.html">Login</a>
+</div>
+
+</section>
+</main>
+
+<script src="app.js"></script>
+<script src="register.js"></script>
+
+</body>
+</html>

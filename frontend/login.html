@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login | RAG Builder</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="shell">
+<section class="hero-panel">
+<div class="hero-copy">
+<span class="eyebrow">AI RAG Studio</span>
+<h1>Login to manage your chatbots</h1>
+<p>Upload documents, create API keys, and run your own document-aware chatbot.</p>
+<div class="hero-actions">
+<a class="btn secondary btn-inline" href="register.html">Create account</a>
+</div>
+</div>
+</section>
+
+<section class="card auth-card">
+
+<h1>Login</h1>
+
+<div id="statusMessage" class="status-message" style="display:none"></div>
+
+<form id="loginForm" novalidate>
+<div class="input-group">
+<label for="username">Username</label>
+<input id="username" name="username" autocomplete="username" placeholder="Enter username" required>
+</div>
+
+<div class="input-group">
+<label for="password">Password</label>
+<input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter password" required>
+</div>
+
+<button class="btn" type="submit">Login</button>
+</form>
+
+<div class="auth-footer">
+<span>New here?</span>
+<a href="register.html">Create an account</a>
+</div>
+
+</section>
+</main>
+
+<script src="app.js"></script>
+<script src="login.js"></script>
+
+</body>
+</html>

@@ -35,3 +35,9 @@ app.add_middleware(
 app.include_router(user_router,prefix='/user')
 app.include_router(create_router,prefix='/create')
 app.include_router(ask_router,prefix='/chat')
+
+import os
+import psutil
+
+process = psutil.Process(os.getpid())
+print(f"Final RAM: {process.memory_info().rss / 1024**2:.2f} MB")
