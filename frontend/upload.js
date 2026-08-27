@@ -1,10 +1,21 @@
+function setUploadBusy(button, busy) {
+    if (!button) {
+        return;
+    }
+
+    button.disabled = busy;
+    button.textContent = busy ? "Creating..." : "Create Bot";
+}
+
 async function uploadFiles(){
 
     if(!requireAuth()){
         return;
     }
 
-    const files=document.getElementById("files").files;
+    const fileInput=document.getElementById("files");
+    const button=document.getElementById("createBotButton");
+    const files=fileInput?.files || [];
 
     if(!files.length){
         setStatus("Please select at least one file.", "error");
@@ -23,6 +34,7 @@ async function uploadFiles(){
     }
 
     try {
+        setUploadBusy(button, true);
         setStatus("Creating bot...", "info");
 
         const result=await fetchJson("/create/bot",{
@@ -36,5 +48,13 @@ async function uploadFiles(){
         window.location.href="dashboard.html";
     } catch (error) {
         setStatus(error.message || "Bot creation failed", "error");
+        setUploadBusy(button, false);
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const button = document.getElementById("createBotButton");
+    if (button) {
+        button.addEventListener("click", uploadFiles);
+    }
+});

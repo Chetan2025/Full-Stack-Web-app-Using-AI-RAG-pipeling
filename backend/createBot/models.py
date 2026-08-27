@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey,Text
 from pgvector.sqlalchemy import Vector
 from utilis.db import Base
 
@@ -19,5 +19,5 @@ class DocumentChunkModel(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     chatbot_id = Column(Integer, ForeignKey("chatbots.id", ondelete="CASCADE"), nullable=False)
-    chunk_text = Column(String, nullable=False)
+    chunk_text = Column(Text, nullable=False)
     embedding = Column(Vector(384), nullable=False)

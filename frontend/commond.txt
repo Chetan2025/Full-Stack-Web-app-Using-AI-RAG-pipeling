@@ -1,1 +1,14 @@
-python -m http.server 5500
+cd "D:\full-stack RAG app\frontend"
+python -m http.http://127.0.0.1:5500/login.html
+server 5500
+
+
+http://127.0.0.1:5500/login.html
+
+
+docker -
+run the project - docker start postgres-pgvector
+to see runing or not - docker ps 
+
+for qurie - docker exec -it postgres-pgvector psql -U postgres -d project_auth
+back ke liye - table - q , overall - exit

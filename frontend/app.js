@@ -1,4 +1,21 @@
-const API_BASE = window.API_BASE || "http://localhost:8000";
+function resolveApiBase() {
+    const saved = localStorage.getItem("API_BASE");
+    if (saved) {
+        return saved;
+    }
+
+    if (window.API_BASE) {
+        return window.API_BASE;
+    }
+
+    if (window.location.protocol === "file:") {
+        return "http://localhost:8000";
+    }
+
+    return `${window.location.protocol}//${window.location.hostname}:8000`;
+}
+
+const API_BASE = resolveApiBase();
 
 function getStoredBotsKey() {
     const currentUser = getCurrentUser();
@@ -51,6 +68,27 @@ function authHeaders(extraHeaders = {}) {
     };
 }
 
+function extractErrorMessage(payload, fallback = "Request failed") {
+    if (!payload) {
+        return fallback;
+    }
+
+    if (typeof payload === "string") {
+        return payload;
+    }
+
+    return payload.detail || payload.message || payload.error || fallback;
+}
+
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
 async function fetchJson(path, options = {}) {
     let response;
 
@@ -72,8 +110,7 @@ async function fetchJson(path, options = {}) {
         : await response.text();
 
     if (!response.ok) {
-        const detail = payload?.detail || payload?.message || payload || "Request failed";
-        throw new Error(detail);
+        throw new Error(extractErrorMessage(payload));
     }
 
     return payload;

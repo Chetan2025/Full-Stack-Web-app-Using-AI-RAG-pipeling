@@ -39,7 +39,7 @@ async function askQuestion(apiKey, questionId, resultId, buttonId){
 			throw new Error(data?.detail || data?.message || "Ask failed");
 		}
 		if(resultBox){
-			resultBox.textContent=data?.answer || data?.response || JSON.stringify(data);
+			resultBox.textContent=data?.answer || data?.response || data?.message || data?.error || JSON.stringify(data);
 		}
 	}catch(error){
 		if(resultBox){
@@ -74,26 +74,43 @@ if (requireAuth()) {
 
 		container.innerHTML=savedBots.map((bot, index)=>{
 			const key = `bot-${index}`;
+			const safeName = escapeHtml(bot.chatbot_name || `Chatbot ${formatBotId(bot)}`);
+			const safeBotId = escapeHtml(formatBotId(bot));
+			const safeApiKey = escapeHtml(bot.api_key || "");
 			return `
 			<div class="bot-card">
 				<div class="bot-card-head">
-					<h3>${bot.chatbot_name || `Chatbot ${formatBotId(bot)}`}</h3>
-					<span class="pill">${formatBotId(bot)}</span>
+					<h3>${safeName}</h3>
+					<span class="pill">${safeBotId}</span>
 				</div>
 				<p class="bot-meta">Uploaded chunks: ${bot.chunks ?? "-"}</p>
 				<div class="api-box">
 					<span>API key</span>
-					<strong>${bot.api_key}</strong>
+					<strong>${safeApiKey}</strong>
 				</div>
 				<div class="ask-box">
 					<label class="ask-label" for="question-${key}">Ask a question</label>
 					<input id="question-${key}" class="ask-input" type="text" placeholder="what is blufo?">
-					<button class="btn secondary ask-btn" id="ask-btn-${key}" type="button" onclick='askQuestion(${JSON.stringify(bot.api_key)}, ${JSON.stringify(`question-${key}`)}, ${JSON.stringify(`answer-${key}`)}, ${JSON.stringify(`ask-btn-${key}`)})'>Ask</button>
+					<button class="btn secondary ask-btn" id="ask-btn-${key}" type="button" data-api-key="${safeApiKey}" data-question-id="question-${key}" data-answer-id="answer-${key}">Ask</button>
 					<div class="ask-result" id="answer-${key}" style="display:none"></div>
 				</div>
 			</div>
 		`;}).join("");
 	}
+
+	container?.addEventListener("click", (event) => {
+		const button = event.target.closest(".ask-btn");
+		if (!button) {
+			return;
+		}
+
+		askQuestion(
+			button.dataset.apiKey || "",
+			button.dataset.questionId || "",
+			button.dataset.answerId || "",
+			button.id
+		);
+	});
 
 	function logout(){
 		const currentUser = getCurrentUser();
@@ -103,6 +120,12 @@ if (requireAuth()) {
 		clearAuthSession();
 		window.location.href="login.html";
 	}
+
+	document.getElementById("createBotNav")?.addEventListener("click", () => {
+		window.location.href = "upload.html";
+	});
+
+	document.getElementById("logoutBtn")?.addEventListener("click", logout);
 
 	window.logout = logout;
 	window.askQuestion = askQuestion;

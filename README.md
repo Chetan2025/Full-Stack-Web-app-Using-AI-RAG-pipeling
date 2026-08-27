@@ -1,111 +1,232 @@
-# Full-Stack RAG Chatbot
+# AI Document Chatbot SaaS Platform
 
-A full-stack Retrieval-Augmented Generation (RAG) application that turns uploaded documents into searchable knowledge for custom AI chatbots. Users can create chatbots, upload documents (PDF/DOCX/TXT), and query the chatbot using an API key. The project combines a FastAPI backend, vector storage (Postgres + pgvector), embedding generation, and a lightweight HTML/JS frontend.
-
-## Key Features
-
-- Document ingestion: upload PDF, DOCX, and TXT files
-- Text extraction and chunking with configurable overlap
-- Embedding generation and storage in PostgreSQL + pgvector
-- Semantic search (cosine similarity) to retrieve relevant chunks
-- RAG pipeline that provides context-aware answers using LLMs
-- API-key based multi-tenant design (each chatbot has its own data)
-- Simple frontend for creating and managing chatbots
-
-## Architecture Overview
-
-- Frontend: static HTML, CSS, JavaScript for user flows and uploads
-- Backend: FastAPI endpoints for auth, document processing, embeddings, and inference
-- Storage: PostgreSQL database with `pgvector` extension for vector search
-- Models: Embedding model and an LLM layer (configured via environment)
-
-## Repository Layout
-
-- `backend/` — FastAPI app, document pipeline, and API routes
-- `frontend/` — HTML/CSS/JS client (dashboard, login, upload pages)
-- `createBot/`, `askque/`, `user/` — backend modules for bot management, QA, and users
-- `utilis/` — utility modules: `db.py`, `helper.py`, `modelLoad.py`, `settings.py`
-
-## Prerequisites
-
-- Python 3.10+
-- PostgreSQL (with `pgvector` extension)
-- (Optional) An LLM/Embedding provider or local LLM service
-
-## Quick Start (Backend)
-
-1. Create and activate a virtual environment
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-
-2. Install dependencies
-
-```powershell
-pip install -r backend/requirements.txt
-```
-
-3. Set environment variables (example `.env` entries)
-
-```
-DB_URL=postgresql://user:password@host:port/dbname
-JWT_SECRET=your_jwt_secret
-ALGORITHM=HS256
-ModelRAPID_API_KEY=your_model_api_key
-MAIL_USER=your_email_user
-MAIL_PASSWORD=your_email_password
-MAIL_API_KEY=your_email_api_key
-```
-
-4. Run the FastAPI server
-
-```powershell
-cd backend
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
-```
-
-The API will be available at `http://localhost:8000` and documentation at `http://localhost:8000/docs`.
-
-## Frontend
-
-The frontend is static files in the `frontend/` folder. You can serve them from any static hosting (Vercel, Netlify) or open `frontend/dashboard.html` locally for basic testing.
-
-## API Usage Example
-
-POST to the QA endpoint (example body):
-
-```json
-{ "api_key": "CHATBOT_API_KEY", "question": "What is the purpose of X?" }
-```
-
-Check `backend` routes for exact endpoint paths and request/response schemas.
-
-## Environment & Configuration
-
-Configuration variables are loaded from environment variables and `.env` via `backend/utilis/settings.py`. At minimum you should configure database connection and any model/LLM API keys required by your inference pipeline.
-
-## Deployments
-
-- Frontend: can be deployed as static hosting (Vercel, Netlify)
-- Backend: compatible with Render, Heroku, or any server that supports FastAPI
-- Ensure PostgreSQL is accessible and `pgvector` is enabled in production DB
-
-## Contributing
-
-Contributions are welcome. Please open issues for bugs or feature requests and submit pull requests with clear descriptions.
-
-## License
-
-This repository includes a `LICENSE` file. Please follow its terms when using or contributing to the project.
+A full-stack Retrieval-Augmented Generation (RAG) SaaS platform that enables users to create custom AI chatbots from their own documents and interact with them using unique API keys. The platform processes uploaded documents, stores semantic embeddings in a vector database, retrieves relevant context, and generates intelligent responses using Large Language Models.
 
 ---
 
-If you want, I can also:
+## Overview
 
-- Add example `.env` and `.env.example` files
-- Add a small `docker-compose.yml` to run Postgres + backend locally
-- Update the README with exact API endpoints and example curl commands after I inspect the backend routes
+This project allows users to:
 
-Tell me which option you prefer and I will proceed.
+* Create custom AI chatbots
+* Upload PDF, DOCX, and TXT documents
+* Automatically generate embeddings from uploaded content
+* Store vectors in PostgreSQL using pgvector
+* Perform semantic similarity search
+* Generate context-aware answers using Mistral/Ollama
+* Access chatbot knowledge bases through API-key-based isolation
+
+---
+
+## Architecture
+
+Frontend (HTML, CSS, JavaScript)
+
+⬇
+
+FastAPI Backend
+
+⬇
+
+<<<<<<< HEAD
+Document Upload
+
+⬇
+
+Text Extraction Layer
+
+(PDF / DOCX / TXT)
+
+⬇
+
+Text Chunking
+
+⬇
+
+Embedding Generation
+
+(BAAI/bge-small-en-v1.5)
+
+⬇
+
+PostgreSQL + pgvector
+
+⬇
+
+Semantic Search
+
+⬇
+
+Retrieved Context
+
+⬇
+
+Mistral / Ollama LLM
+
+⬇
+
+Generated Answer
+
+---
+
+## Features
+
+### Multi-Tenant Chatbot Platform
+
+* Create multiple chatbots
+* API-key-based chatbot isolation
+* Independent document knowledge bases
+
+### Document Processing
+
+* PDF support
+* DOCX support
+* TXT support
+* Automated text extraction pipeline
+
+### Embedding Pipeline
+
+* Semantic embedding generation using BAAI/bge-small-en-v1.5
+* Efficient vector storage using pgvector
+* High-performance retrieval workflows
+
+### Retrieval-Augmented Generation (RAG)
+
+* Context retrieval before answer generation
+* Reduced hallucinations
+* Document-grounded responses
+
+### Semantic Search
+
+* Cosine similarity vector search
+* Top relevant chunk retrieval
+* Context-aware answer generation
+
+### Frontend Interface
+
+* Responsive UI
+* Chatbot creation dashboard
+* Multi-file document upload
+* Real-time upload previews
+* Client-side validation
+
+### REST APIs
+
+* Chatbot creation
+* Document upload
+* Embedding generation
+* Retrieval pipeline
+* AI inference endpoints
+
+---
+
+## Tech Stack
+
+### Backend
+
+* FastAPI
+* Python
+* PostgreSQL
+* pgvector
+
+### AI & Machine Learning
+
+* Sentence Transformers
+* BAAI/bge-small-en-v1.5
+* Ollama
+* Mistral
+* Retrieval-Augmented Generation (RAG)
+
+### Frontend
+
+* HTML
+* CSS
+* JavaScript
+
+### Deployment
+
+* Vercel
+* Render
+
+---
+
+## Project Highlights
+
+* Built a complete end-to-end RAG application from scratch.
+* Implemented vector search using PostgreSQL and pgvector.
+* Designed a scalable API-key-based multi-tenant architecture.
+* Integrated semantic retrieval with LLM-powered response generation.
+* Developed a production-ready document ingestion and chatbot workflow.
+* Supported multiple document formats with automated processing.
+* Deployed full-stack application using modern cloud deployment platforms.
+
+---
+
+## Installation
+
+### Clone Repository
+
+```bash
+git clone <repository-url>
+cd project-folder
+```
+
+### Backend Setup
+
+```bash
+cd backend
+
+python -m venv venv
+
+venv\Scripts\activate
+
+pip install -r requirements.txt
+```
+
+### Configure Environment Variables
+
+Create a `.env` file inside the backend directory:
+
+```env
+DATABASE_URL=your_database_url
+OLLAMA_BASE_URL=your_ollama_url
+```
+
+### Run Backend
+
+```bash
+uvicorn main:app --reload
+```
+
+### Run Frontend
+
+Open the frontend folder and launch `index.html` using a browser or local server.
+
+---
+
+## Future Improvements
+
+* User authentication and authorization
+* Chat history persistence
+* Team collaboration support
+* Streaming responses
+* Support for additional LLM providers
+* Analytics dashboard
+* Role-based access control
+
+---
+
+## Author
+
+**Chetan**
+
+AI Engineer | Full Stack Developer | 
+=======
+Tech Stack: FastAPI, Python, PostgreSQL, pgvector, Sentence Transformers, BGE Embeddings, Ollama, Mistral, HTML, CSS, JavaScript, Vercel, Render.
+
+
+api call body - {
+    "api_key": "CHATBOT_API_KEY",
+    "question": "Quary"
+}
+>>>>>>> 3df8a3c (updateing the project)
