@@ -18,7 +18,13 @@ from utilis.helper import generate_api_key
 from createBot.models import ChatBotModel, DocumentChunkModel
 
 
-def create(files: List[UploadFile], db: Session,request):
+def create(files: List[UploadFile],chatbot_name, db: Session,request):
+
+    if not chatbot_name or not chatbot_name.strip():
+        return {
+            "message": "Please add a name for your chatbot"
+        }
+
     # Extract text from uploaded files
     text = extractText.extract_text(files)
 
@@ -29,7 +35,7 @@ def create(files: List[UploadFile], db: Session,request):
     # Generate API key and save chatbot
     chatbot = ChatBotModel(
         user_id=request.id,
-        chatbot_name="My Chatbot",
+        chatbot_name=chatbot_name,
         api_key=generate_api_key(),
         usage_count=0
     )
@@ -51,6 +57,7 @@ def create(files: List[UploadFile], db: Session,request):
     # Return response
     return {
         "chatbot_id": chatbot.id,
+        "chatbot_name": chatbot.chatbot_name,
         "api_key": chatbot.api_key,
         "chunks": len(chunks)
     }

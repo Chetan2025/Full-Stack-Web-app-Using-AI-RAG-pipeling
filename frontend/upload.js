@@ -7,27 +7,43 @@ function setUploadBusy(button, busy) {
     button.textContent = busy ? "Creating..." : "Create Bot";
 }
 
-async function uploadFiles(){
+async function uploadFiles(event){
+    if (event) {
+        event.preventDefault();
+    }
 
     if(!requireAuth()){
         return;
     }
 
+    const chatbotNameInput=document.getElementById("chatbotName");
     const fileInput=document.getElementById("files");
     const button=document.getElementById("createBotButton");
     const files=fileInput?.files || [];
+    const chatbotName=(chatbotNameInput?.value || "").trim();
+
+    if(!chatbotName){
+        setStatus("Chatbot name is required.", "error");
+        chatbotNameInput?.focus();
+        chatbotNameInput?.reportValidity?.();
+        return;
+    }
 
     if(!files.length){
         setStatus("Please select at least one file.", "error");
+        fileInput?.focus();
+        fileInput?.reportValidity?.();
         return;
     }
 
     if(files.length > 3){
         setStatus("Maximum 3 files allowed per chatbot.", "error");
+        fileInput?.focus();
         return;
     }
 
     const formData=new FormData();
+    formData.append("chatbot_name", chatbotName);
 
     for(let file of files){
         formData.append("files",file);
@@ -53,8 +69,8 @@ async function uploadFiles(){
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const button = document.getElementById("createBotButton");
-    if (button) {
-        button.addEventListener("click", uploadFiles);
+    const form = document.getElementById("createBotForm");
+    if (form) {
+        form.addEventListener("submit", uploadFiles);
     }
 });

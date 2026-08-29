@@ -8,6 +8,7 @@ from user.router import user_router
 from utilis.db import Base
 from createBot.router import create_router
 from askque.router import ask_router
+from operation.router import op_router
 from utilis.modelLoad import model
 from ollama import chat
 
@@ -32,6 +33,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(op_router,prefix='/home')
 app.include_router(user_router,prefix='/user')
 app.include_router(create_router,prefix='/create')
 app.include_router(ask_router,prefix='/chat')

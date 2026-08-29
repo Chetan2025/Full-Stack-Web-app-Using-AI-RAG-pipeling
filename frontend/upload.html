@@ -21,22 +21,40 @@
 
 <div id="statusMessage" class="status-message" style="display:none"></div>
 
-<p class="muted">Upload up to 3 documents. Supported flow: PDF, DOCX and TXT through the backend pipeline.</p>
+<form id="createBotForm" novalidate>
+    <p class="muted">Upload up to 3 documents. Supported flow: PDF, DOCX and TXT through the backend pipeline.</p>
 
-<input
-multiple
-type="file"
-id="files"
-accept=".pdf,.docx,.txt"
->
+    <div class="input-group">
+        <label for="chatbotName">Chatbot Name</label>
+        <input
+            id="chatbotName"
+            name="chatbot_name"
+            type="text"
+            maxlength="80"
+            placeholder="Enter chatbot name"
+            required
+        >
+    </div>
 
-<br><br>
+    <div class="input-group">
+        <label for="files">Documents</label>
+        <input
+            multiple
+            type="file"
+            id="files"
+            name="files"
+            accept=".pdf,.docx,.txt"
+            required
+        >
+    </div>
 
-<button
-id="createBotButton"
-class="btn">
-Create Bot
-</button>
+    <button
+        id="createBotButton"
+        class="btn"
+        type="submit">
+        Create Bot
+    </button>
+</form>
 
 </div>
 

@@ -20,4 +20,4 @@ class DocumentChunkModel(Base):
     id = Column(Integer, primary_key=True, index=True)
     chatbot_id = Column(Integer, ForeignKey("chatbots.id", ondelete="CASCADE"), nullable=False)
     chunk_text = Column(Text, nullable=False)
-    embedding = Column(Vector(384), nullable=False)
+    embedding = Column(Vector(384), nullable=False) # pg vector use to store the embdings
